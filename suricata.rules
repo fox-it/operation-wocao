@@ -6,7 +6,7 @@ alert tcp any !1080 -> any any (msg:"FOX-SRT - IOC - XServer/Agent - Possible XS
 
 alert tcp any any -> any any (msg:"FOX-SRT - IOC - XServer/Agent - Possible XServer Backdoor ProxyTransmit REPLY_ERROR"; dsize:10; content:"|05050001000000000000|"; fast_pattern:only; classtype:trojan-activity; priority:3; reference:url,https://www.fox-it.com/en/news/whitepapers/operation-wocao-shining-a-light-on-one-of-chinas-hidden-hacking-groups/; sid:21002454; rev:3;)
 
-alert tcp any any -> any !1080 (msg:"FOX-SRT - IOC - XServer/Agent - Possible XServer Start SOCKS5 Proxy mode (ProxyTransmit)"; stream_size:server,=,1; stream_size:client,=,4; dsize:3; content:"|050100|"; fast_pattern:only; classtype:attempted-admin; reference:url,https://www.fox-it.com/en/news/whitepapers/operation-wocao-shining-a-light-on-one-of-chinas-hidden-hacking-groups/; priority:3; sid:21002457; 
+alert tcp any any -> any !1080 (msg:"FOX-SRT - IOC - XServer/Agent - Possible XServer Start SOCKS5 Proxy mode (ProxyTransmit)"; stream_size:server,=,1; stream_size:client,=,4; dsize:3; content:"|050100|"; fast_pattern:only; classtype:attempted-admin; reference:url,https://www.fox-it.com/en/news/whitepapers/operation-wocao-shining-a-light-on-one-of-chinas-hidden-hacking-groups/; priority:3; sid:21002457;)
 
 alert tcp any any -> any any (msg:"FOX-SRT - IOC – XServer/Agent - Suspicious Root SNI in SSL Client Hello"; flow:established; content:"|1603|"; depth:2; content:"|01|"; distance:3; within:1; content:"|000000090007000004|Root"; fast_pattern; threshold: type limit, track by_src, seconds 300, count 1; classtype:trojan-activity; priority:1; reference:url,https://www.fox-it.com/en/news/whitepapers/operation-wocao-shining-a-light-on-one-of-chinas-hidden-hacking-groups/; sid:21002432; rev:1;)
 
